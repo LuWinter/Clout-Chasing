@@ -1,0 +1,14 @@
+# R config files to ignore
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.virtual_documents
+
+# Data and temp files to ignore
+data/
+temp/
+processed/
+
+# Other files to ignore
+
