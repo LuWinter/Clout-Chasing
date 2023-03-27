@@ -6,16 +6,17 @@
 #   
 # PROJECT STRUCTURE
 #     |--Clout-Chasing.Rproj 
-#     |--code               # store code files
-#     |--data               # store raw data
-#     |--doc                # store relevant documents
-#     |--log                # store log files
-#     |--processed          # store processed data
-#     |   |--intermediate   # store processed temp data
-#     |--results            
-#     |   |--figures        # store result figures
-#     |   |--tables         # store result tables
+#     |--code/              # store code files
+#     |--data/              # store raw data
+#     |--doc/               # store relevant documents
+#     |--log/               # store log files
+#     |--processed/         # store processed data
+#     |   |--intermediate/  # store temp data during process
+#     |--results/            
+#     |   |--figures/       # store result figures
+#     |   |--tables/        # store result tables
 #     |--run.R              # project runner
+#     |--temp/              # temp files
 #
 # SOFTWARE REQUIREMENTS
 #   Analyses run on MacOS using Stata version 17 and R-4.2.0
