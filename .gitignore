@@ -1,14 +1,15 @@
-# R config files to ignore
-.Rproj.user
+# Config files to ignore
+.Rproj.user/
 .Rhistory
 .RData
 .Ruserdata
-.virtual_documents
+.virtual_documents/
+.idea/
 
 # Data and temp files to ignore
-data/
+/data/
 temp/
-processed/
+/processed/
+.tmp.driveupload/
 
 # Other files to ignore
-
