@@ -20,7 +20,7 @@
 #
 # SOFTWARE REQUIREMENTS
 #   Analyses run on MacOS using Stata version 17 and R-4.2.0
-#.    with tidyverse package installed
+#     with tidyverse package installed
 #
 # TO PERFORM A CLEAN RUN, DELETE THE FOLLOWING TWO FOLDERS:
 #   /processed/intermediate
@@ -39,6 +39,9 @@ pacman::p_load(here)
 pacman::p_load(RStata)
 pacman::p_load(rio)
 pacman::p_load(fs)
+
+## Load user defined functions
+source("code/_utils.R")
 
 ## Project root
 i_am(path = "run.R")
@@ -68,7 +71,8 @@ dir_create(here("results", "tables"))
 
 
 # 4. Run Analysis ---------------------------------------------------------
-# source(here("code", "01_GGF-statistics.R"), local = new.env())
+run_script(path = "code/04_basic-analysis.R")
+run_script(path = "code/temp.do")
 
 
 ### EOF
