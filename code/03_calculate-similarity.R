@@ -1,7 +1,7 @@
 
 #########################################################
 # SCRIPT: 03_calculate-similarity.R
-# TASK: This script calculate the text similarity using "Soft Cosine" algorithm
+# TASK: This script calculates the text similarity using "Soft Cosine" algorithm
 #########################################################
 
 
@@ -12,6 +12,10 @@ pacman::p_load(dplyr)
 pacman::p_load(jiebaR)
 pacman::p_load(stringr)
 pacman::p_load(text2vec)
+pacman::p_load(here)
+
+## Locate the project
+i_am("code/03_calculate-similarity.R")
 
 
 # 1. Prepare Data ---------------------------------------------------------
@@ -79,7 +83,7 @@ run_compute <- function(x, y) {
     norm = "l2"
   )
   walk(
-    .x = 1:nrow(simi_matrix), 
+    .x = seq_len(simi_matrix),
     .f = \(x) {
       simi_matrix[x, ][simi_matrix[x, ] < 0] <<- 0
       simi_matrix[x, ] <<- simi_matrix[x, ] ^ 2

@@ -13,20 +13,21 @@ pacman::p_load(dplyr)
 pacman::p_load(stringr)
 pacman::p_load(here)
 
-# Locate the project
+## Locate the project
 i_am("code/02_train-wordvec.R")
+
 
 # 1. Split Tokens ---------------------------------------------------------
 ## Split tokens using jiebaR
 word_segment <- worker(stop_word = "data/baidu_stopwords.txt")
 
 ## Conduct splitting by year
-res_vec = c()
-for (year in c(2010:2022)) {
+res_vec <- NULL
+for (year in 2010:2022) {
   message(paste("Now process year", year), "tokens...")
   
   message("=> Collect text...")
-  path = paste0("data/HuDongE/Year=", year)
+  path <- paste0("data/HuDongE/Year=", year)
   hde_arrow <- open_dataset(sources = path)
   hde_text <- hde_arrow |> 
     select(提问内容, 回复内容) |> 
@@ -52,14 +53,14 @@ for (year in c(2010:2022)) {
 
 # 2. Train Wordvec --------------------------------------------------------
 ## Build corpus
-it = itoken(list(res_vec), progressbar = TRUE)
-vocab = create_vocabulary(it)
-vocab = prune_vocabulary(vocab, term_count_min = 10L)
+it <- itoken(list(res_vec), progressbar = TRUE)
+vocab <- create_vocabulary(it)
+vocab <- prune_vocabulary(vocab, term_count_min = 10L)
 
 ## Calculate co-occurrence matrix
 message("\nNow build co-occurrence matrix...")
-vectorizer = vocab_vectorizer(vocab)
-tcm = create_tcm(it, vectorizer, skip_grams_window = 5L)
+vectorizer <- vocab_vectorizer(vocab)
+tcm <- create_tcm(it, vectorizer, skip_grams_window = 5L)
 
 saveRDS(
   object = res_vec, 
@@ -69,18 +70,18 @@ rm(res_vec)
 
 ## Generate wordvec
 message("\nNow train word vectors...")
-glove = GlobalVectors$new(rank = 128, x_max = 10)
-wv_main = glove$fit_transform(
+glove <- GlobalVectors$new(rank = 128, x_max = 10)
+wv_main <- glove$fit_transform(
   tcm, n_iter = 30, 
   convergence_tol = 0.01, n_threads = 8
 )
-wv_context = glove$components
-word_vectors = wv_main + t(wv_context)
+wv_context <- glove$components
+word_vectors <- wv_main + t(wv_context)
 
 ## Test wordvec 
 find_similar_words <- function(keyword, num = 10) {
-  target_word = word_vectors[keyword, , drop = FALSE]
-  cos_sim = sim2(
+  target_word <- word_vectors[keyword, , drop = FALSE]
+  cos_sim <- sim2(
     x = word_vectors, 
     y = target_word, 
     method = "cosine", 

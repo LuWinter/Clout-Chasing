@@ -12,6 +12,10 @@ pacman::p_load(readxl)
 pacman::p_load(lubridate)
 pacman::p_load(purrr)
 pacman::p_load(stringr)
+pacman::p_load(here)
+
+## Locate the project
+i_am("code/01_detect-posts.R")
 
 
 # 1. Prepare Data ---------------------------------------------------------
@@ -70,7 +74,7 @@ detect_post <- function(event, date) {
 }
 
 post_list <- map(
-  .x = 1:nrow(hot_events), 
+  .x = seq_along(hot_events),
   .f = \(x) {
     res <- detect_post(
       event = hot_events[[x, 1]], 
@@ -86,7 +90,7 @@ post_df <- reduce(.x = post_list, .f = bind_rows) |>
   distinct(id, .keep_all = TRUE)
 
 ## Write result to csv
-csv_path = "processed/detected-post_20230326.csv"
+csv_path <- "processed/detected-post_20230326.csv"
 write_csv_arrow(x = post_df, sink = csv_path)
 
 
