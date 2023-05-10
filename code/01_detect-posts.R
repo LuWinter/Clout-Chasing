@@ -91,10 +91,7 @@ post_df <- reduce(.x = post_list, .f = bind_rows) |>
 dim(post_df)
 
 ## Write result to csv
-csv_path <- sprintf(
-  fmt = "processed/detected-post_%s.csv",
-  str_remove_all(today(), "-")
-)
+csv_path <- "processed/detected-post_B30-A60.csv"
 write_csv_arrow(x = post_df, sink = csv_path)
 
 
