@@ -68,7 +68,7 @@ detect_post <- function(event, date) {
       str_detect(提问内容, event),
       `提问时间` >= start_date,
       `提问时间` <= end_date,
-      # `上市公司是否回复` == "已回复"
+      `上市公司是否回复` == "已回复"
     )
   res
 }
